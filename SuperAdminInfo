@@ -1,0 +1,83 @@
+describe('Actions', () => {
+
+    it('Visits the SuperAdmin Login page', () => {
+         
+         cy.visit('https://event-super-admin-ts.mithyalabs.com/')
+         cy.get('input[name=email]').type('superadmin@eventtool.com')
+         cy.get('input[name=password]').type('97Z5$z@_')
+         //cy.click('value=SUBMIT').click()
+         cy.get('.jss11 > .MuiButtonBase-root > .MuiButton-label').click() 
+   
+    })
+   
+   
+   
+    it('openclient', () => {
+          //Click on the created client
+        cy.contains('QA Auto').click()
+        cy.wait(5000)
+        //cy.get('.jss568').click()
+    })
+
+    it('Validating Info Tab', () => {
+
+        cy.contains('QA Auto').click()
+        cy.wait(5000)
+    //Verifying fields in the Info tab
+        cy.contains('QA Auto').should('exist')
+        cy.contains('CLIENT URL').should('exist')
+        cy.contains('Regions').should('exist')
+        cy.contains('RELATIONSHIP').should('exist')
+        cy.contains('INDUSTRIES').should('exist')
+        cy.contains('LEAD STATUS').should('exist')
+        cy.contains('LANGUAGES').should('exist')
+
+    //Validating Client URL
+    cy.get('.MuiPaper-root > .MuiFormControl-root > .MuiInputBase-root > .MuiInputBase-input').clear()
+    cy.get('[type=submit]').click()
+    cy.contains('This field is a required').should('exist')
+    cy.get('.MuiPaper-root > .MuiFormControl-root > .MuiInputBase-root > .MuiInputBase-input').type('qaauto')
+
+    //Validating Region field
+    cy.get('input[name=keywordField]').type("India{enter}")
+    cy.focused().type("German{enter}")
+    cy.get('.MuiButton-contained > .MuiButton-label').click()
+    cy.wait(2000)
+    cy.contains('Agency Edited Successfully').should('exist')
+        
+        //Validating 'Relationship' field
+        cy.get('[class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary"]').first().click()
+       cy.get('[class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl"]').eq(1).type("Relation1{enter}")
+       cy.focused().type("Relation2{enter}")
+       cy.contains('SUBMIT').click()
+       cy.wait(2000)
+       cy.contains("RELATION Updated").should('exist')
+       
+
+       //Validating 'Industries' field
+       cy.get('[class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary"]').eq(1).click()
+       cy.get('[class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl"]').eq(1).type("Industry1{enter}")
+        cy.focused().type("Industry2{enter}")
+        cy.contains('SUBMIT').click()
+       cy.wait(3000)
+       cy.contains('INDUSTRY Updated').should('exist')
+
+
+       //Validating 'Lead Status' field
+       cy.get('[class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary"]').eq(2).click()
+       cy.get('[class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl"]').eq(1).type("Lead1{enter}")
+        cy.focused().type("Lead2{enter}")
+        cy.contains('SUBMIT').click()
+       cy.wait(3000)
+       cy.contains('LEVEL Updated').should('exist')
+
+        //Validating 'Languages' field
+        cy.get('.MuiAutocomplete-endAdornment > .MuiButtonBase-root > .MuiIconButton-label > .MuiSvgIcon-root').click()
+       cy.contains('English').click()
+       cy.get('.MuiAutocomplete-endAdornment > .MuiButtonBase-root > .MuiIconButton-label > .MuiSvgIcon-root').click()
+       cy.contains('German').click()
+       cy.get('.MuiButton-contained > .MuiButton-label').click()
+       cy.contains('Agency Edited Successfully').should('exist')
+
+    })
+})
